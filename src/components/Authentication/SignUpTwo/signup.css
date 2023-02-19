@@ -1,0 +1,33 @@
+#signupDiv{
+    margin-top:4px;
+}
+
+#signupButton{
+    margin-top: 16px;
+}
+
+#signEmail{
+    margin-top:4px;
+}
+
+#signError{
+    margin-bottom:4px;
+}
+
+.signImage{
+    width:43vw;
+    margin-left:5vw;
+    margin-top:24px;
+}
+
+.nameIcon{
+    width:24px;
+    height:24px;
+    position:relative;
+    top:6px;
+    left:8px;
+    margin-top:0;
+}
+#passInput{
+    margin-top:-40px;
+}

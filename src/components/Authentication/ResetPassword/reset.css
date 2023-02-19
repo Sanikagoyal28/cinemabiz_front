@@ -1,0 +1,20 @@
+.resetimage{
+    width:26vw;
+     margin-left:6vw;
+     margin-top:8px;
+}
+
+#LEye{
+    width:20px;
+    height:22px;
+    color: black;
+    z-index:10;
+  position:relative;
+  left:24vw;
+  top:8px;
+  cursor: pointer;
+}
+
+#pwdName1, #pwdName2{
+    margin-bottom:-18px;
+}
