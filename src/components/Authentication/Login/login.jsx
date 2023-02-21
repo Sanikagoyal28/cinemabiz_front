@@ -1,19 +1,75 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import signin from "../../Assets/signin.svg"
 import emailicon from "../../Assets/emailIcon.svg"
 import passicon from "../../Assets/passwordIcon.svg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./login.css";
+import { useDispatch, useSelector } from "react-redux";
+import create from "../../Redux/loginSlice"
+import SignInThunk from "../../Redux/loginSlice";
+import { useNavigate } from "react-router";
+import { ToastContainer, toast } from 'react-toastify';
+import {Spinner} from 'react-bootstrap';
+import 'react-toastify/dist/ReactToastify.css';
 // import { Box, Button, Dialog, DialogContent, DialogTitle, TextField, Typography } from "@mui/material";
 
 function Login() {
     // const [openPopup, setOpenPopup] = useState(false)
-    
+    const dispatch = useDispatch()
+    const s = useSelector((state)=>state.users)
     const [show1, setShow1] = useState(true)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [isAuthEmail, setIsAuthEmail] = useState(false)
+    const [loading, setLoading] = useState(s.loading)
+    const navigate = useNavigate();
+    const checkEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    useEffect(() => {
+        if (checkEmail.test(email)) {
+            document.getElementById("loginWrongEmail").style.display = "none";
+            setIsAuthEmail(true)
+        }
+        else if (email) {
+            document.getElementById("loginWrongEmail").style.display = "block";
+            setIsAuthEmail(false)
+        }
+    }, [email])
     function handleShow1() {
         setShow1(!show1)
     }
+
+    const data ={
+        email,
+        password
+    }
+    localStorage.setItem("email", email)
+    function SigninCall (){
+        if(isAuthEmail){
+            console.log(data)
+            dispatch(SignInThunk(data))
+        }
+    }
+    useEffect(()=>{
+        setLoading(s.loading)
+    },[s])
+    useEffect(()=>{
+        if(s.loading){
+            if(s.response){
+                toast.success(`${s.response}`, {
+                    position: "top-right",
+                    theme: "light",
+                });
+            }
+            else{
+                toast.error(`${s.error}`, {
+                    position: "top-right",
+                    theme: "light",
+                });
+            }
+        }
+    },[s])
 
     return <>
     <div className="authDiv">
@@ -23,19 +79,19 @@ function Login() {
                     password or create a new account if you are new to Cinemabiz.</p>
             <p className="authEmail">Email Address</p>    
             <img src={emailicon} className="emailIcon" />
-            <input type="text" className="authEmailInput" placeholder="Enter your Email" />
-            <p className="wrongEmail">Invalid Email Address</p>
-            <p className="authEmail">Password</p>    
+            <input type="text" className="authEmailInput" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your Email" />
+            <p className="wrongEmail" id="loginWrongEmail">Invalid Email Address</p>
+            <p className="authEmail" id="loginPwd">Password</p>    
             <img src={passicon} className="pwdIcon" />
             {show1 ? (
                     <FontAwesomeIcon icon={faEye} id="LEye" onClick={handleShow1} />
                 ) : (
                     <FontAwesomeIcon icon={faEyeSlash} id="LEye" onClick={handleShow1} />
                 )}
-            <input type={show1?"text":"password"} className="authEmailInput" placeholder="Enter your Password" />
-            <p className="fgtPwd">Forgot Password ?</p>
-            <button type="button" className="signIn">SignIn</button>
-            <button type="button" className="createAcc">Create Account</button>
+            <input type={show1?"text":"password"} className="authEmailInput" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your Password" />
+            <p className="fgtPwd" onClick={()=>navigate("/forgot")}>Forgot Password ?</p>
+            <button type="button" className="signIn" onClick={()=>SigninCall()}>SignIn</button>
+            <button type="button" className="createAcc" onClick={()=>navigate("/signup")}>Create Account</button>
         </div>
         <img src={signin} className="authImage" />
     </div>
@@ -54,6 +110,9 @@ function Login() {
                 <Button variant="outlined">Create Account</Button>
             </Box>
         </Dialog> */}
+        <Spinner animation="border" variant="dark"/>
+        {/* {loading?<Spinner animation="border" variant="dark" id="loadSpinner" /> : null} */}
+        <ToastContainer />
     </>
 }
 

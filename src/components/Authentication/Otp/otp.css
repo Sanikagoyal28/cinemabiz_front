@@ -1,0 +1,47 @@
+.otpInputFlex{
+    display:flex;
+}
+
+.otpInput{
+    width: 1vw;
+    height: 36px;
+    border: 1px solid rgba(0, 0, 0, 0.9);
+    border-radius: 8px;
+    margin-bottom:4px;
+    margin-right:0.8vw;
+    padding:4px 16px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
+  margin-top:4px;
+}
+
+.resend{
+    display: flex;
+    margin-left:16vw;
+}
+#resendOtp{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 16px;
+    text-decoration-line: underline;
+    color: #5C3F76;
+    margin-top:2px;
+    margin-right:10px;
+    /* margin-left:17vw; */
+    cursor: pointer;
+}
+#timer{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 16px;
+    text-decoration-line: underline;
+    color: #5C3F76;
+    margin-top: 2px;
+}

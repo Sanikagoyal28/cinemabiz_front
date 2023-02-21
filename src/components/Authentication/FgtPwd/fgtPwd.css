@@ -12,7 +12,7 @@
     line-height: 18px;
     color: #FFFFFF;
     cursor: pointer;
-    margin-top:24px;
+    margin-top:36px;
 }
 
 #fgtText{
@@ -24,6 +24,10 @@
 }
 
 .fgtImage{
-    width:26vw;
-    margin-left:6vw;
+    width:33vw;
+    margin-left:3.5vw;
+}
+
+#forgotEmail{
+    display: none;
 }

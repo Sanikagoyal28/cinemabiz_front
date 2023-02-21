@@ -15,7 +15,7 @@
 }
 
 .signImage{
-    width:43vw;
+    width:31vw;
     margin-left:5vw;
     margin-top:24px;
 }
@@ -30,4 +30,16 @@
 }
 #passInput{
     margin-top:-40px;
+}
+
+#signWrongEmail{
+    display: none;
+}
+#signWrongPwd1, #signWrongPwd2{
+    display: none;
+    margin-bottom:4px;
+}
+#signWrongName{
+    display: none;
+    margin-bottom:4px;
 }

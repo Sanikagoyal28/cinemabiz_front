@@ -1,6 +1,6 @@
 .resetimage{
-    width:26vw;
-     margin-left:6vw;
+    width:32vw;
+     margin-left:5vw;
      margin-top:8px;
 }
 
@@ -17,4 +17,13 @@
 
 #pwdName1, #pwdName2{
     margin-bottom:-18px;
+    margin-top:24px;
+}
+
+#pwdName2{
+    margin-top:24px;
+}
+
+#resetWrongPwd2, #resetWrongPwd1{
+    display: none;
 }
