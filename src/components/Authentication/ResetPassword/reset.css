@@ -27,3 +27,6 @@
 #resetWrongPwd2, #resetWrongPwd1{
     display: none;
 }
+#spinner2{
+    position :relative;
+}

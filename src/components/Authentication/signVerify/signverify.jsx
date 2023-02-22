@@ -7,13 +7,17 @@ import { ForgotPwdThunk, SignupVerifyThunk } from "../../Redux/loginSlice"
 import { ToastContainer} from 'react-toastify';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import * as ReactBootstrap from 'react-bootstrap';
 
 function SignVerify() {
     const [value,setValue] = useState("")
     const email = localStorage.getItem("email")
-    const [navigateSign, setNavigateSign] = useState(false)
     const reducer = useSelector((s)=>s.users)
     const [seconds, setSeconds] = useState(59)
+    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     useEffect(() => {
         const timer =
             seconds > 0 && setInterval(() => {
@@ -21,47 +25,58 @@ function SignVerify() {
             }, 1000)
         return () => clearInterval(timer)
     }, [seconds])
+
     useEffect(() => {
         if (seconds != 0)
             document.getElementById("resendOtp").style.opacity = "0.5";
         else
             document.getElementById("resendOtp").style.opacity = "1";
     }, [seconds])
+
     const data = {
         email,
         otp:value
     }
-    console.log(data)
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    useEffect(()=>{
-        setNavigateSign(reducer.toSign)
-    },[reducer])
-    // useEffect(()=>{
-    //    if(navigateSign)
-    //    navigate("/signuptwo")
-    // },[navigateSign])
-
+   
     function signupDetail(){
         if(value){
             dispatch(SignupVerifyThunk(data))
+            .then((res) => {
+                if(res.payload.data.success){
+                    navigate("/signuptwo")
+                }
+                if(!res.payload.data.success){
+                    toast.error(`${res.payload.data.msg}`, {
+                        position: "top-right",
+                        theme: "light",
+                    });
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
         }
     }
-    useEffect(()=>{
-        if(reducer.response){
-            toast.success(`${reducer.response}`, {
-                position: "top-right",
-                theme: "light",
-            });
-        }
-        else{
-            toast.error(`${reducer.error}`, {
-                position: "top-right",
-                theme: "light",
-            });
-        }
 
-    },[reducer])
+    useEffect(() => {
+            if (reducer.response) {
+                toast.success(`${reducer.response}`, {
+                    position: "top-right",
+                    theme: "light",
+                });
+            }
+    }, [reducer.response])
+
+    useEffect(() => {
+        if (reducer.loading) {
+            setLoading(true)
+            document.body.style.opacity = 0.5;
+        }
+        else {
+            setLoading(false)
+            document.body.style.opacity = 1;
+        }
+    }, [reducer.loading])
  
     return <>
     <div className="authDiv">
@@ -89,6 +104,7 @@ function SignVerify() {
         </div>
         <img src={otp} className="fgtImage" />
     </div>
+    {loading?<ReactBootstrap.Spinner animation="border" variant="dark" id="loadSpinner" /> : null}
     <ToastContainer />
     </>
 }

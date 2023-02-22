@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react"
 import otp from "../../Assets/otp.svg"
 import OtpField from "react-otp-field"
 import "./otp.css"
-import { ToastContainer} from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { ForgotPwdThunk, OtpVerifyThunk } from "../../Redux/loginSlice";
+import * as ReactBootstrap from 'react-bootstrap';
 
 function Otp() {
-    const [value,setValue] = useState("")
+    const [value, setValue] = useState("")
     const email = localStorage.getItem("email")
-    const [navigateReset, setNavigateReset] = useState(false)
-    const otpR = useSelector((s)=>s.users)
+    const [loading, setLoading] = useState(false)
+    const otpR = useSelector((s) => s.users)
     const [seconds, setSeconds] = useState(59)
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -30,54 +32,79 @@ function Otp() {
         else
             document.getElementById("resendOtp").style.opacity = "1";
     }, [seconds])
-    
+
     const data = {
         email,
-        otp:value
+        otp: value
+    }
+    console.log(data)
+
+    function resetPassword() {
+        dispatch(OtpVerifyThunk(data))
+            .then((res) => {
+                if(res.payload.data.success){
+                    navigate("/reset")
+                }
+                if (!res.payload.data.success) {
+                    toast.error(`${res.payload.data.msg}`, {
+                        position: "top-right",
+                        theme: "light",
+                    });
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
-    useEffect(()=>{
-        setNavigateReset(otpR.toReset)
-    },[otpR])
-
-    useEffect(()=>{
-       if(navigateReset)
-       navigate("/reset")
-    },[navigateReset])
-
-    function resetPassword(){
-        if(value){
-            dispatch(OtpVerifyThunk(data))
+    useEffect(() => {
+        if (otpR.response) {
+            toast.success(`${otpR.response}`, {
+                position: "top-right",
+                theme: "light",
+            });
         }
-    }
- 
+    }, [otpR.response])
+
+    useEffect(() => {
+        if (otpR.loading) {
+            setLoading(true)
+            document.body.style.opacity = 0.5;
+        }
+        else {
+            setLoading(false)
+            document.body.style.opacity = 1;
+        }
+    }, [otpR.loading])
+
     return <>
-    <div className="authDiv">
-        <div className="leftDiv" id="fgtDiv">
-            <h1 className="authHead">Otp Verification ;)</h1>
-            <p className="authText" id="fgtText">To complete the password reset process, please enter the Otp sent on your Email Address</p>
-            <p className="authEmail">Enter Otp for verification</p> 
-            <div className="otpInputFlex">
-            <OtpField className="otpInputFlex"
-            value={value}
-            onChange={setValue}
-            numInputs={6}
-            onChangeRegex={/^([0-9]{0,})$/}
-            autoFocus
-            isTypeNumber
-            inputProps={{ className: 'otpInput', disabled: false }}
-        />
-        </div>
-            {/* <p className="wrongEmail">Otp only contains numeric characters.</p> */}
-            <div className="resend">
-            <p id='resendOtp' disabled={seconds !== 0 ? true : false} onClick={() => { dispatch(ForgotPwdThunk(email), setSeconds(59)) }}>Resend Otp</p>
-            <span id="timer">00:{seconds}</span>
+        <div className="authDiv">
+            <div className="leftDiv" id="fgtDiv">
+                <h1 className="authHead">Otp Verification ;)</h1>
+                <p className="authText" id="fgtText">To complete the password reset process, please enter the Otp sent on your Email Address</p>
+                <p className="authEmail">Enter Otp for verification</p>
+                <div className="otpInputFlex">
+                    <OtpField className="otpInputFlex"
+                        value={value}
+                        onChange={setValue}
+                        numInputs={6}
+                        onChangeRegex={/^([0-9]{0,})$/}
+                        autoFocus
+                        isTypeNumber
+                        inputProps={{ className: 'otpInput', disabled: false }}
+                    />
+                </div>
+                {/* <p className="wrongEmail">Otp only contains numeric characters.</p> */}
+                <div className="resend">
+                    <p id='resendOtp' disabled={seconds !== 0 ? true : false} onClick={() => { dispatch(ForgotPwdThunk(email), setSeconds(59)) }}>Resend Otp</p>
+                    <span id="timer">00:{seconds}</span>
+                </div>
+                <button type="button" className="continue" onClick={() => { resetPassword() }}>Continue</button>
             </div>
-            <button type="button" className="continue" onClick={()=>{resetPassword()}}>Continue</button>
+            <img src={otp} className="fgtImage" />
         </div>
-        <img src={otp} className="fgtImage" />
-    </div>
-    <ToastContainer />
+        {loading ? <ReactBootstrap.Spinner animation="border" variant="dark" id="loadSpinner" /> : null}
+        <ToastContainer />
     </>
 }
 

@@ -8,7 +8,9 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
 import { SignTwoThunk } from "../../Redux/loginSlice"
-import { ToastContainer} from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import * as ReactBootstrap from 'react-bootstrap';
 
 function SignupTwo() {
 
@@ -18,12 +20,12 @@ function SignupTwo() {
     const [isPass, setIsPass] = useState(false)
     const [show1, setShow1] = useState(false)
     const [show2, setShow2] = useState(false)
+    const [loading, setLoading] = useState(false)
     const email = localStorage.getItem("email")
     const rightname = /^[A-Za-z\s]*$/;
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [navigateLogin, setNavigateLogin] = useState(false)
-    const reducer = useSelector((s)=>s.users)
+    const reducer = useSelector((s) => s.users)
     function handleShow1() {
         setShow1(!show1)
     }
@@ -62,27 +64,51 @@ function SignupTwo() {
         }
     }, [name]);
 
-    useEffect(() => {
-        setNavigateLogin(reducer.toHome)
-    }, [reducer])
-    // useEffect(()=>{
-    //    if(navigateLogin)
-    //    navigate("/")
-    // },[navigateLogin])
-
-    const data ={
-        name:name,
-        email:email,
-        password:pass
+    const data = {
+        name: name,
+        email: email,
+        password: pass
     }
-
-    console.log(data)
 
     function handleSignup() {
         if (isPass) {
             dispatch(SignTwoThunk(data))
+                .then((res) => {
+                    if (res.payload.data.success) {
+                        navigate("/")
+                    }
+                    if (!res.payload.data.success) {
+                        toast.error(`${res.payload.data.msg}`, {
+                            position: "top-right",
+                            theme: "light",
+                        });
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
         }
     }
+
+    useEffect(() => {
+        if (reducer.response) {
+            toast.success(`${reducer.response}`, {
+                position: "top-right",
+                theme: "light",
+            });
+        }
+    }, [reducer.response])
+
+    useEffect(() => {
+        if (reducer.loading) {
+            setLoading(true)
+            document.body.style.opacity = 0.5;
+        }
+        else {
+            setLoading(false)
+            document.body.style.opacity = 1;
+        }
+    }, [reducer.loading])
 
     return <>
         <div className="authDiv">
@@ -111,10 +137,11 @@ function SignupTwo() {
                 )}
                 <input type={show2 ? "text" : "password"} value={cPass} onChange={(e) => setCPass(e.target.value)} className="authEmailInput" placeholder="Enter your Password" />
                 <p className="wrongEmail" id="signWrongPwd2">Password entered in two fields must be same.</p>
-                <button type="button" className="continue" id="signupButton" onClick={()=>{handleSignup()}}>Continue</button>
+                <button type="button" className="continue" id="signupButton" onClick={() => { handleSignup() }}>Continue</button>
             </div>
             <img src={signup} className="signImage" />
         </div>
+        {loading ? <ReactBootstrap.Spinner animation="border" variant="dark" id="loadSpinner" /> : null}
         <ToastContainer />
     </>
 }

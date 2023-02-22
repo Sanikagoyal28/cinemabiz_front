@@ -11,8 +11,16 @@ body{
 #loadSpinner {
     z-index: 9999;
     position: fixed;
-    /* top: 45vh;
-    left: 50vw; */
+    top: 45vh;
+    left: 50vw;
+}
+
+#spinner{
+    /* display: block; */
+    /* position:absolute; */
+    z-index:10;
+    /* width:200px; */
+    /* height:200px; */
 }
 
 .authDiv{
@@ -31,7 +39,7 @@ body{
 display: flex;
 flex-direction: column;
 margin-left:5vw;
-margin-top:30px;
+margin-top:65px;
 }
 
 .authHead{
@@ -64,8 +72,8 @@ margin-top:30px;
 }
 
 .authEmailInput{
-    width: 23vw;
-    height: 36px;
+    width: 26vw;
+    height: 38px;
     border: 1px solid rgba(0, 0, 0, 0.9);
     border-radius: 8px;
     margin-bottom:4px;
@@ -105,7 +113,7 @@ margin-top:30px;
     font-size: 13px;
     line-height: 16px;
     text-decoration-line: underline;
-    color: #5C3F76;
+    color: #C81912;
     margin-top: 2px;
     margin-left:17vw;
     cursor: pointer;
@@ -142,7 +150,7 @@ margin-top:30px;
 height: 36px;
 outline:none;
 border:none;
-background: #5C3F76;
+background:  #C81912;
 border-radius: 8px;
 font-family: 'Montserrat';
 font-style: normal;
@@ -159,12 +167,12 @@ font-style: normal;
 font-weight: 500;
 font-size: 16px;
 line-height: 17px;
-color: #6C488D;
+color:  #C81912;
 width: 160px;
 height: 36px;
 outline:none;
 background: #FFFFFF;
-border: 1px solid #6C488D;
+border: 1px solid  #C81912;
 border-radius: 8px;
 margin-left:13vw;
 cursor: pointer;

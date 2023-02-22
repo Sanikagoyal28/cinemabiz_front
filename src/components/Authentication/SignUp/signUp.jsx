@@ -4,17 +4,19 @@ import emailicon from "../../Assets/emailIcon.svg"
 import { useNavigate } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
 import { SignupThunk } from "../../Redux/loginSlice"
-import { ToastContainer} from 'react-toastify';
+import { ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import * as ReactBootstrap from 'react-bootstrap';
 
 function SignUp() {
 
     const [email, setEmail] = useState("")
     const [isAuthEmail, setIsAuthEmail] = useState(false)
+    const[loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const checkEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const reducer = useSelector((s)=>s.users)
-    const [navigateSignVerify, setNavigateSignVerify] = useState(false)
 
     useEffect(() => {
         if (checkEmail.test(email)) {
@@ -27,21 +29,46 @@ function SignUp() {
         }
     }, [email])
 
-    useEffect(()=>{
-        setNavigateSignVerify(reducer.toVerify)
-    },[reducer])
-
-    // useEffect(()=>{
-    //     if(navigateSignVerify)
-    //     navigate("/signverify")
-    //  },[navigateSignVerify])
-
-     localStorage.setItem("email", email)
     function sendOtp() {
+        localStorage.setItem("email", email)
         if(isAuthEmail){
             dispatch(SignupThunk(email))
+            .then((res) => {
+                if(res.payload.data.success){
+                    navigate("/signverify")
+                }
+                if(!res.payload.data.success){
+                    toast.error(`${res.payload.data.msg}`, {
+                        position: "top-right",
+                        theme: "light",
+                    });
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
         }
     }
+
+    // useEffect(() => {
+    //         if (reducer.response) {
+    //             toast.success(`${reducer.response}`, {
+    //                 position: "top-right",
+    //                 theme: "light",
+    //             });
+    //         }
+    // }, [reducer])
+
+    useEffect(() => {
+        if (reducer.loading) {
+            setLoading(true)
+            document.body.style.opacity = 0.5;
+        }
+        else {
+            setLoading(false)
+            document.body.style.opacity = 1;
+        }
+    }, [reducer.loading])
 
     return <>
     <div className="authDiv">
@@ -57,6 +84,7 @@ function SignUp() {
         </div>
         <img src={signin} className="authImage" />
     </div>
+    {loading?<ReactBootstrap.Spinner animation="border" variant="dark" id="loadSpinner" /> : null}
     <ToastContainer />
     </>
 }

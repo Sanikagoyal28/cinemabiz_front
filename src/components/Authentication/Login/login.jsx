@@ -10,14 +10,15 @@ import create from "../../Redux/loginSlice"
 import SignInThunk from "../../Redux/loginSlice";
 import { useNavigate } from "react-router";
 import { ToastContainer, toast } from 'react-toastify';
-import {Spinner} from 'react-bootstrap';
+// import Spinner from 'react-bootstrap/Spinner';
+import * as ReactBootstrap from 'react-bootstrap';
 import 'react-toastify/dist/ReactToastify.css';
 // import { Box, Button, Dialog, DialogContent, DialogTitle, TextField, Typography } from "@mui/material";
 
 function Login() {
     // const [openPopup, setOpenPopup] = useState(false)
     const dispatch = useDispatch()
-    const s = useSelector((state)=>state.users)
+    const s = useSelector((state) => state.users)
     const [show1, setShow1] = useState(true)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -40,61 +41,78 @@ function Login() {
         setShow1(!show1)
     }
 
-    const data ={
+    const data = {
         email,
         password
     }
-    localStorage.setItem("email", email)
-    function SigninCall (){
+  
+    function SigninCall() {
+        localStorage.setItem("email", email)
         if(isAuthEmail){
-            console.log(data)
-            dispatch(SignInThunk(data))
+            dispatch(SignInThunk(data)).
+            then((res)=>{
+                console.log(res)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
         }
     }
-    useEffect(()=>{
+
+    useEffect(() => {
         setLoading(s.loading)
-    },[s])
-    useEffect(()=>{
-        if(s.loading){
-            if(s.response){
+    }, [s])
+
+    useEffect(() => {
+        if (s.loading) {
+            if (s.response) {
                 toast.success(`${s.response}`, {
                     position: "top-right",
                     theme: "light",
                 });
             }
-            else{
+            if (s.error) {
                 toast.error(`${s.error}`, {
                     position: "top-right",
                     theme: "light",
                 });
             }
         }
-    },[s])
+    }, [s])
+
+    useEffect(() => {
+        if (loading === true) {
+            document.body.style.opacity = 0.5;
+        }
+        else {
+            document.body.style.opacity = 1;
+        }
+    }, [loading])
 
     return <>
-    <div className="authDiv">
-        <div className="leftDiv">
-            <h1 className="authHead">Hi User :)</h1>
-            <p className="authText">To keep connected with Cinemabiz, please login to your account by email address and
+        <div className="authDiv">
+            <div className="leftDiv">
+                <h1 className="authHead">Hi User :)</h1>
+                <p className="authText">To keep connected with Cinemabiz, please login to your account by email address and
                     password or create a new account if you are new to Cinemabiz.</p>
-            <p className="authEmail">Email Address</p>    
-            <img src={emailicon} className="emailIcon" />
-            <input type="text" className="authEmailInput" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your Email" />
-            <p className="wrongEmail" id="loginWrongEmail">Invalid Email Address</p>
-            <p className="authEmail" id="loginPwd">Password</p>    
-            <img src={passicon} className="pwdIcon" />
-            {show1 ? (
+                <p className="authEmail">Email Address</p>
+                <img src={emailicon} className="emailIcon" />
+                <input type="text" className="authEmailInput" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your Email" />
+                <p className="wrongEmail" id="loginWrongEmail">Invalid Email Address</p>
+                <p className="authEmail" id="loginPwd">Password</p>
+                <img src={passicon} className="pwdIcon" />
+                {show1 ? (
                     <FontAwesomeIcon icon={faEye} id="LEye" onClick={handleShow1} />
                 ) : (
                     <FontAwesomeIcon icon={faEyeSlash} id="LEye" onClick={handleShow1} />
                 )}
-            <input type={show1?"text":"password"} className="authEmailInput" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your Password" />
-            <p className="fgtPwd" onClick={()=>navigate("/forgot")}>Forgot Password ?</p>
-            <button type="button" className="signIn" onClick={()=>SigninCall()}>SignIn</button>
-            <button type="button" className="createAcc" onClick={()=>navigate("/signup")}>Create Account</button>
+                <input type={show1 ? "text" : "password"} className="authEmailInput" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your Password" />
+                <p className="fgtPwd" onClick={() => navigate("/forgot")}>Forgot Password ?</p>
+                <button type="button" className="signIn" onClick={() => SigninCall()}>SignIn</button>
+                <button type="button" className="createAcc" onClick={() => navigate("/signup")}>Create Account</button>
+            </div>
+            <img src={signin} className="authImage" />
         </div>
-        <img src={signin} className="authImage" />
-    </div>
         {/* <Button onClick={() => setOpenPopup(true)} variant="contained" >Login</Button>
         <Dialog open={openPopup}>
             <Box sx={{width:450}}>
@@ -110,8 +128,11 @@ function Login() {
                 <Button variant="outlined">Create Account</Button>
             </Box>
         </Dialog> */}
-        <Spinner animation="border" variant="dark"/>
-        {/* {loading?<Spinner animation="border" variant="dark" id="loadSpinner" /> : null} */}
+        <div>
+
+            {/* <ReactBootstrap.Spinner animation="border" variant="dark" id="spinner" /> */}
+        </div>
+        {loading?<ReactBootstrap.Spinner animation="border" variant="dark" id="loadSpinner" /> : null}
         <ToastContainer />
     </>
 }

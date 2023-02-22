@@ -8,21 +8,11 @@ const initialState = {
     loading: false,
     response: '',
     error: '',
-    // toHome: false,
-    // toOtp: false,
-    // toReset: false,
-    // toLogin: false,
-    // toVerify: false,
-    // toSign: false,
     toast:false,
     auth:false
 }
 
-// first create thunk to handle Apis 
-// SignInThunk : dispatch action
 const SignInThunk = createAsyncThunk("auth/signin", async (data) => {
-    // const response = await axios.post("http://localhost:3000/login",{email:"sanikagoyal9@gmail.com"})
-    // console.log(response)
     return await Baseurl.post("login", data)
         .then((res) => {
             return res
@@ -30,16 +20,15 @@ const SignInThunk = createAsyncThunk("auth/signin", async (data) => {
         .catch((Err) => {
             return Err.response
         })
-    // return response;
 })
 
-const ForgotPwdThunk = createAsyncThunk("auth/forgot", async (email) => {
+const ForgotPwdThunk = createAsyncThunk("auth/forgot", async (email, navigate) => {
     return await Baseurl.post("forgot_pwd", { email })
         .then((res) => {
             return res
         })
         .catch((Err) => {
-            return Err.response
+             return Err.response
         })
 })
 
@@ -56,7 +45,6 @@ const OtpVerifyThunk = createAsyncThunk("auth/otp", async (data) => {
 const ResetPasswordThunk = createAsyncThunk("auth/reset", async (data) => {
 
     const accessToken =localStorage.getItem("access token")
-    console.log(accessToken)
     const config = {
         headers: {
             "Authorization": `Bearer ${accessToken}`
@@ -91,7 +79,6 @@ const SignupVerifyThunk = createAsyncThunk("auth/signverify", async (data) => {
 const SignTwoThunk = createAsyncThunk("auth/signtwo", async (data) => {
 
     const accessToken =localStorage.getItem("access token")
-    console.log(accessToken)
     const config = {
         headers: {
             "Authorization": `Bearer ${accessToken}`
@@ -113,33 +100,21 @@ const SigninSlice = createSlice({
     extraReducers: (builder) => {
         //login
         builder.addCase(SignInThunk.pending, (state, action) => {
-            console.log(action)
             state.loading = true;
             state.auth = false;
         })
         builder.addCase(SignInThunk.fulfilled, (state, action) => {
             state.toast = true;
+            state.loading = false;
             if (action.payload.data.success) {
-                state.loading = false;
                 state.response = action.payload.data.msg;
                 state.error = '';
-                // state.toHome = true
                 state.auth = true;
-                // toast.success(`${action.payload.data.msg}`, {
-                //     position: "top-right",
-                //     theme: "light",
-                // });
             }
             else {
-                state.loading = false;
                 state.response = ''
                 state.error = action.payload.data.msg;
-                state.toHome = false;
                 state.auth = false;
-                // toast.error(`${action.payload.data.msg}`, {
-                //     position: "top-right",
-                //     theme: "light",
-                // });
             }
         })
         builder.addCase(SignInThunk.rejected, (state, action) => {
@@ -149,38 +124,28 @@ const SigninSlice = createSlice({
 
         // forgot password
         builder.addCase(ForgotPwdThunk.pending, (state, action) => {
-            console.log(action)
             state.loading = true;
             state.auth = false;
+            state.toast = false;
         })
         builder.addCase(ForgotPwdThunk.fulfilled, (state, action) => {
             state.toast = true;
+            state.loading = false;
             if (action.payload.data.success) {
-                state.loading = false;
+                state.auth = true;
                 state.response = action.payload.data.msg
                 state.error = ''
-                state.toOtp = true;
-                state.auth = true;
-                // toast.success(`${action.payload.data.msg}`, {
-                //     position: "top-right",
-                //     theme: "light",
-                // });
             }
             else {
-                state.loading = false;
                 state.response = ''
                 state.error = action.payload.data.msg
-                state.toOtp = false
                 state.auth = false;
-                // toast.error(`${action.payload.data.msg}`, {
-                //     position: "top-right",
-                //     theme: "light",
-                // });
             }
         })
         builder.addCase(ForgotPwdThunk.rejected, (state, action) => {
             state.loading = false;
             state.auth = false;
+            state.toast = false;
         })
 
         // otp verify
@@ -190,28 +155,17 @@ const SigninSlice = createSlice({
         })
         builder.addCase(OtpVerifyThunk.fulfilled, (state, action) => {
             state.toast = true;
+            state.loading = false;
             if (action.payload.data.success) {
-                state.loading = false;
                 state.response = action.payload.data.msg
                 state.error = ''
-                state.toReset = true;
                 state.auth = true;
                 localStorage.setItem("access token", action.payload.data.token )
-                toast.success(`${action.payload.data.msg}`, {
-                    position: "top-right",
-                    theme: "light",
-                });
             }
             else {
-                state.loading = false;
                 state.response = ''
                 state.error = action.payload.data.msg
-                state.toReset = false
                 state.auth = false;
-                toast.error(`${action.payload.data.msg}`, {
-                    position: "top-right",
-                    theme: "light",
-                });
             }
         })
         builder.addCase(OtpVerifyThunk.rejected, (state) => {
@@ -225,28 +179,16 @@ const SigninSlice = createSlice({
             state.auth = false;
         })
         builder.addCase(ResetPasswordThunk.fulfilled, (state, action) => {
-            console.log(action)
+            state.loading = false;
             if (action.payload.data.success) {
-                state.loading = false;
                 state.response = action.payload.data.msg
                 state.error = ''
-                state.toLogin = true;
                 state.auth = true;
-                toast.success(`${action.payload.data.msg}`, {
-                    position: "top-right",
-                    theme: "light",
-                });
             }
             else {
-                state.loading = false;
                 state.response = ''
                 state.error = action.payload.data.msg
-                state.toLogin = false
                 state.auth = false;
-                toast.error(`${action.payload.data.msg}`, {
-                    position: "top-right",
-                    theme: "light",
-                });
             }
         })
         builder.addCase(ResetPasswordThunk.rejected, (state) => {
@@ -259,26 +201,14 @@ const SigninSlice = createSlice({
             state.loading = true;
         })
         builder.addCase(SignupThunk.fulfilled, (state, action) => {
-            console.log(action)
+            state.loading = false;
             if (action.payload.data.success) {
-                state.loading = false;
                 state.response = action.payload.data.msg
                 state.error = ''
-                state.toVerify = true;
-                toast.success(`${action.payload.data.msg}`, {
-                    position: "top-right",
-                    theme: "light",
-                });
             }
             else {
-                state.loading = false;
                 state.response = ''
                 state.error = action.payload.data.msg
-                state.toVerify = false
-                toast.error(`${action.payload.data.msg}`, {
-                    position: "top-right",
-                    theme: "light",
-                });
             }
         })
         builder.addCase(SignupThunk.rejected, (state) => {
@@ -290,27 +220,15 @@ const SigninSlice = createSlice({
             state.loading = true;
         })
         builder.addCase(SignupVerifyThunk.fulfilled, (state, action) => {
-            console.log(action)
+            state.loading = false;
             if (action.payload.data.success) {
-                state.loading = false;
                 state.response = action.payload.data.msg
                 state.error = ''
-                state.toSign = true;
                 localStorage.setItem("access token", action.payload.data.token )
-                toast.success(`${action.payload.data.msg}`, {
-                    position: "top-right",
-                    theme: "light",
-                });
             }
             else {
-                state.loading = false;
                 state.response = ''
                 state.error = action.payload.data.msg
-                state.toSign = false
-                toast.error(`${action.payload.data.msg}`, {
-                    position: "top-right",
-                    theme: "light",
-                });
             }
         })
         builder.addCase(SignupVerifyThunk.rejected, (state) => {
@@ -322,26 +240,14 @@ const SigninSlice = createSlice({
             state.loading = true;
         })
         builder.addCase(SignTwoThunk.fulfilled, (state, action) => {
-            console.log(action)
+            state.loading = false;
             if (action.payload.data.success) {
-                state.loading = false;
                 state.response = action.payload.data.msg
                 state.error = ''
-                state.toSign = true;
-                toast.success(`${action.payload.data.msg}`, {
-                    position: "top-right",
-                    theme: "light",
-                });
             }
             else {
-                state.loading = false;
                 state.response = ''
                 state.error = action.payload.data.msg
-                state.toSign = false
-                toast.error(`${action.payload.data.msg}`, {
-                    position: "top-right",
-                    theme: "light",
-                });
             }
         })
         builder.addCase(SignTwoThunk.rejected, (state) => {
