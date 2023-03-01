@@ -7,6 +7,7 @@ import ResetPassword from "./components/Authentication/ResetPassword/rstPwd";
 import SignUp from "./components/Authentication/SignUp/signUp";
 import SignupTwo from "./components/Authentication/SignUpTwo/signUpTwo";
 import SignVerify from "./components/Authentication/signVerify/signverify";
+import Homepage from "./components/Home/homepage";
 
 function App() {
  return <>
@@ -19,6 +20,8 @@ function App() {
         <Route exact element={<SignUp />} path="/signup" />
         <Route exact element={<SignVerify />} path="/signverify" />
         <Route exact element={<SignupTwo />} path="/signuptwo" />
+        
+        <Route exact element={<Homepage />} path="/" />
     </Routes>
  </BrowserRouter>
  </>

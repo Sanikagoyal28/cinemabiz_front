@@ -1,0 +1,34 @@
+.moviecard{
+    width: 220px;
+    height: 380px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 8px #A8A4A4;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+}
+.movieImage{
+    position: absolute;
+    width: 242px;
+    height: 290px;
+}
+.moviename{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+}
+.movierating{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: rgba(0, 0, 0, 0.9);
+}
+.moviegenre{
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 22px;
+    color: rgba(0, 0, 0, 0.7);
+}

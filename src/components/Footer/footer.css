@@ -1,0 +1,66 @@
+.footer{
+    position: relative;
+    width: 100vw;
+    height: 280px;
+    left: 0px;
+    bottom:0;
+    background: linear-gradient(180deg, #121212 3.67%, rgba(50, 49, 49, 0.0859601) 485.86%, rgba(53, 52, 52, 0) 485.91%);
+    display: flex;
+}
+.footerOne{
+display: flex;
+flex-direction: column;
+margin-top:160px;
+margin-left:5vw;
+}
+.footHead{
+    font-family: 'Sora';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 35px;
+    color: #FFFFFF;
+    margin-bottom:4px;
+}
+.footText{
+    width: 329px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1.1rem;
+    line-height: 20px;
+    color: rgba(255, 255, 255, 0.4);
+}
+.footerTwo{
+    display: flex;
+    flex-direction: column;
+    margin-top:100px;
+}
+#two{
+    margin-left:38vw;
+}
+#three{
+margin-left:6vw;
+}
+.footerTwo ul{
+    list-style: none;
+    padding-left: 0;
+}
+.footerTwo ul li{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 0.95rem;
+    line-height: 22px;
+    color: rgb(255, 255, 255,0.9);
+    cursor: pointer;
+}
+.footTwoHead{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 22px;
+    color: #FFFFFF;
+    margin-bottom:16px;
+}

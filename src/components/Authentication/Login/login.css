@@ -3,7 +3,7 @@
 body{
     margin:0;
     padding:0;
-    font-family: "Montserrat";
+    /* font-family: "Montserrat"; */
     background-color:#FBF6FF;
     z-index:2;
 }
@@ -13,14 +13,6 @@ body{
     position: fixed;
     top: 45vh;
     left: 50vw;
-}
-
-#spinner{
-    /* display: block; */
-    /* position:absolute; */
-    z-index:10;
-    /* width:200px; */
-    /* height:200px; */
 }
 
 .authDiv{
@@ -44,7 +36,7 @@ margin-top:65px;
 
 .authHead{
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 2.7rem;
     line-height: 53px;
     margin-bottom: 6px;
@@ -53,7 +45,7 @@ margin-top:65px;
 
 .authText{
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     width:27vw;
     font-size: 15px;
     line-height: 16px;
@@ -63,7 +55,7 @@ margin-top:65px;
 
 .authEmail{
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 15px;
     line-height: 18px;
     color: rgba(0, 0, 0, 1);    

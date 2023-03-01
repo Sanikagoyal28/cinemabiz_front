@@ -50,15 +50,6 @@ function SignUp() {
         }
     }
 
-    // useEffect(() => {
-    //         if (reducer.response) {
-    //             toast.success(`${reducer.response}`, {
-    //                 position: "top-right",
-    //                 theme: "light",
-    //             });
-    //         }
-    // }, [reducer])
-
     useEffect(() => {
         if (reducer.loading) {
             setLoading(true)

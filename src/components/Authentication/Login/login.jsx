@@ -90,7 +90,7 @@ function Login() {
     }, [loading])
 
     return <>
-        <div className="authDiv">
+        <div className="authDiv" id="LOGIN">
             <div className="leftDiv">
                 <h1 className="authHead">Hi User :)</h1>
                 <p className="authText">To keep connected with Cinemabiz, please login to your account by email address and
