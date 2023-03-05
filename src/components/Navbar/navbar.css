@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Kaushan+Script&family=Manrope:wght@200;300;400&family=Montserrat&family=Poppins:wght@200;300;400;500&family=Sora:wght@200;300;400&display=swap');
-*{
-    margin:0;
-    padding:0;
+
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins';
     scroll-behavior: smooth;
 }
+
 /* 
 #LOGIN, #FORGOT_PASSWORD{
     display: none;
@@ -27,22 +29,23 @@
     top: 0;
     left: 0;
     width: 100vw;
-    padding:0;
+    padding: 0;
 }
 
 .navOne {
     width: 100vw;
-    height: 58px;
+    height: 54px;
     background: #C81912;
     display: flex;
-    padding:13px;
-    padding-right:5vw;
-    padding-left:3vw;
+    padding: 13px;
+    padding-right: 5vw;
+    padding-left: 3vw;
     justify-content: space-between;
+    padding-top: -2px;
 }
 
-.subNav{
-    display: flex;   
+.subNav {
+    display: flex;
 }
 
 .navTitle {
@@ -61,15 +64,15 @@
     font-size: 1.25rem;
     line-height: 27px;
     color: #FFFFFF;
-    margin-top:4px;
+    margin-top: 2px;
 }
 
 .navButton {
-    width: 136px;
-    height: 32px;
+    width: 9vw;
+    height: 34px;
     background: rgba(255, 255, 255, 0.95);
-    outline:none;
-    border:none;
+    outline: none;
+    border: none;
     border-radius: 8px;
     font-family: 'Poppins';
     font-style: normal;
@@ -77,44 +80,45 @@
     font-size: 1.2rem;
     line-height: 27px;
     color: #C81912;
-    margin-left:3vw;
+    margin-left: 3vw;
     cursor: pointer;
+    margin-top: -2px;
 }
 
 .navSearch {
     width: 360px;
-    height: 32px;
+    height:30px;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 8px;
-    margin-left:2vw;
+    margin-left: 2vw;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 300;
     font-size: 1.1rem;
-    padding-left:2vw;
-    padding-top:4px;
-    color:rgba(0, 0, 0, 0.6);
+    padding-left: 2vw;
+    margin-top:-1px;
+    padding-top: 2px;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .navTwo {
     width: 100vw;
-    height:40px;
+    height: 40px;
     background: linear-gradient(257.51deg, #C81912 -42.74%, rgba(208, 63, 56, 0) 368.83%);
     background-blend-mode: darken;
     filter: drop-shadow(0px 3px 4px rgba(0, 0, 0, 0.25));
-    display:flex;
+    display: flex;
     justify-content: flex-end;
-    padding-top:8px;
-    padding-right:5vw;
+    padding-top: 8px;
+    padding-right: 5vw;
 }
 
 .navHead {
-font-style: normal;
-font-weight: 300;
-font-size: 1rem;
-line-height: 25px;
-color: #FFFFFF;
-margin-left:2vw;
-cursor: pointer;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 25px;
+    color: #FFFFFF;
+    margin-left: 2vw;
+    cursor: pointer;
 }
-

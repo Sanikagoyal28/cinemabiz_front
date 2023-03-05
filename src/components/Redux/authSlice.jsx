@@ -269,9 +269,6 @@ const openLoginDialog = createSlice({
     }
 })
 export {openLoginDialog};
-console.log(openLoginDialog)
-// export {openDialog} = openLoginDialog.actions
-
 export default SignInThunk
 export { ForgotPwdThunk, OtpVerifyThunk, ResetPasswordThunk, SignTwoThunk, SignupThunk, SignupVerifyThunk }
 export { SigninSlice }

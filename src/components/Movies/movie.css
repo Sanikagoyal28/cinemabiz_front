@@ -1,27 +1,41 @@
 .moviecard{
-    width: 220px;
-    height: 380px;
+    width: 230px;
+    /* height: 380px; */
     background: #FFFFFF;
     box-shadow: 0px 4px 8px #A8A4A4;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
+    padding-left:12px;
+    padding-right:12px;
 }
 .movieImage{
-    position: absolute;
-    width: 242px;
-    height: 290px;
+    width: 230px;
+    height: 280px;
+    border-top-right-radius: 16px;
+    border-top-left-radius: 16px;
+    margin-left:-12px;
 }
 .moviename{
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
+    margin-top:8px;
+}
+.moviestar{
+    display: flex;
+    margin-top:-30px;
+}
+.star{
+    margin-right:6px;
+    display: none;
 }
 .movierating{
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
+    margin-top:18px;
     line-height: 22px;
     color: rgba(0, 0, 0, 0.9);
 }
@@ -31,4 +45,5 @@
     font-size: 16px;
     line-height: 22px;
     color: rgba(0, 0, 0, 0.7);
+    margin-top:-12px;
 }

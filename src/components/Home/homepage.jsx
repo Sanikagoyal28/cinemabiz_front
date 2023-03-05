@@ -7,15 +7,6 @@ import "./homepage.css"
 
 function Homepage (){
     return <>
-    {/* <Box>
-        <AppBar>
-            <Toolbar>
-                <Typography>Cinemabiz</Typography>
-                <Typography>Location</Typography>
-                <Button>Signin</Button>
-            </Toolbar>
-        </AppBar>
-    </Box> */}
     <Navbar />
     <div className="home POPUPBG">
     <p className="homeTitle">Recommended Movies</p>

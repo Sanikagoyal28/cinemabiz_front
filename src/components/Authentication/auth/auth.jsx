@@ -45,7 +45,7 @@ function Auth() {
     const [loading, setLoading] = useState(false)
     const reducer = useSelector((s) => s.users)
     const popup = useSelector((s)=>s.dialog)
-    console.log(popup)
+    // console.log(popup)
     const checkEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     const [show, setShow] = useState(true)
@@ -434,7 +434,7 @@ function Auth() {
         setOpenPopup(popup.isOpen)
     },[popup])
     const [openDialog, setOpenDialog] = useState({
-        login: true,
+        login: openPopup,
         forgot: false,
         otp: false,
         reset: false,
