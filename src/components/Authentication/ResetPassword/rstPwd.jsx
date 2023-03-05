@@ -6,7 +6,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./reset.css"
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { ResetPasswordThunk } from "../../Redux/loginSlice";
+import { ResetPasswordThunk } from "../../Redux/authSlice";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as ReactBootstrap from 'react-bootstrap';

@@ -3,7 +3,7 @@ import signin from "../../Assets/signin.svg"
 import emailicon from "../../Assets/emailIcon.svg"
 import { useNavigate } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
-import { SignupThunk } from "../../Redux/loginSlice"
+import { SignupThunk } from "../../Redux/authSlice"
 import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as ReactBootstrap from 'react-bootstrap';

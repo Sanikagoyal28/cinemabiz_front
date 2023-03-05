@@ -22,8 +22,8 @@ const SignInThunk = createAsyncThunk("auth/signin", async (data) => {
         })
 })
 
-const ForgotPwdThunk = createAsyncThunk("auth/forgot", async (email, navigate) => {
-    return await Baseurl.post("forgot_pwd", { email })
+const ForgotPwdThunk = createAsyncThunk("auth/forgot", async (emailF) => {
+    return await Baseurl.post("forgot_pwd", { email:emailF })
         .then((res) => {
             return res
         })
@@ -58,8 +58,8 @@ const ResetPasswordThunk = createAsyncThunk("auth/reset", async (data) => {
             return Err.response
         })
 })
-const SignupThunk = createAsyncThunk("auth/signup", async (email) => {
-    return await Baseurl.post("signup", {email})
+const SignupThunk = createAsyncThunk("auth/signup", async (emailS) => {
+    return await Baseurl.post("signup", {email:emailS})
         .then((res) => {
             return res
         })
@@ -255,6 +255,22 @@ const SigninSlice = createSlice({
         })
     }
 })
+
+const state={
+    isOpen: false
+}
+const openLoginDialog = createSlice({
+    name:"open",
+    initialState:state,
+    reducers:{
+        openDialog (state, action){
+            state.isOpen= true
+        }
+    }
+})
+export {openLoginDialog};
+console.log(openLoginDialog)
+// export {openDialog} = openLoginDialog.actions
 
 export default SignInThunk
 export { ForgotPwdThunk, OtpVerifyThunk, ResetPasswordThunk, SignTwoThunk, SignupThunk, SignupVerifyThunk }

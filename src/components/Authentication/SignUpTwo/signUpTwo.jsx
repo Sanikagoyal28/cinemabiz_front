@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
-import { SignTwoThunk } from "../../Redux/loginSlice"
+import { SignTwoThunk } from "../../Redux/authSlice"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as ReactBootstrap from 'react-bootstrap';

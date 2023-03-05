@@ -22,7 +22,7 @@
     display: flex;
     margin-left:16vw;
 }
-#resendOtp{
+#fgtResendOtp{
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
@@ -35,7 +35,7 @@
     /* margin-left:17vw; */
     cursor: pointer;
 }
-#timer{
+#timer1{
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;

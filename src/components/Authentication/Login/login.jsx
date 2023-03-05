@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./login.css";
 import { useDispatch, useSelector } from "react-redux";
-import create from "../../Redux/loginSlice"
-import SignInThunk from "../../Redux/loginSlice";
+import create from "../../Redux/authSlice"
+import SignInThunk from "../../Redux/authSlice";
 import { useNavigate } from "react-router";
 import { ToastContainer, toast } from 'react-toastify';
 // import Spinner from 'react-bootstrap/Spinner';
@@ -90,7 +90,7 @@ function Login() {
     }, [loading])
 
     return <>
-        <div className="authDiv" id="LOGIN">
+        <div className="authDiv">
             <div className="leftDiv">
                 <h1 className="authHead">Hi User :)</h1>
                 <p className="authText">To keep connected with Cinemabiz, please login to your account by email address and
@@ -107,7 +107,7 @@ function Login() {
                     <FontAwesomeIcon icon={faEyeSlash} id="LEye" onClick={handleShow1} />
                 )}
                 <input type={show1 ? "text" : "password"} className="authEmailInput" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your Password" />
-                <p className="fgtPwd" onClick={() => navigate("/forgot")}>Forgot Password ?</p>
+                <p className="fgtPwd" onClick={() => {localStorage.setItem("forgot", true)}}>Forgot Password ?</p>
                 <button type="button" className="signIn" onClick={() => SigninCall()}>SignIn</button>
                 <button type="button" className="createAcc" onClick={() => navigate("/signup")}>Create Account</button>
             </div>

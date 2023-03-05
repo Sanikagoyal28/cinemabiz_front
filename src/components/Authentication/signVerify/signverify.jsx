@@ -3,7 +3,7 @@ import otp from "../../Assets/otp.svg"
 import OtpField from "react-otp-field"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router"
-import { ForgotPwdThunk, SignupVerifyThunk } from "../../Redux/loginSlice"
+import { ForgotPwdThunk, SignupVerifyThunk } from "../../Redux/authSlice"
 import { ToastContainer} from 'react-toastify';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

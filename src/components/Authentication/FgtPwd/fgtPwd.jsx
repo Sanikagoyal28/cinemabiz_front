@@ -4,7 +4,7 @@ import emailicon from "../../Assets/emailIcon.svg"
 import "./fgtPwd.css"
 import { useNavigate } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
-import { ForgotPwdThunk } from "../../Redux/loginSlice"
+import { ForgotPwdThunk } from "../../Redux/authSlice"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as ReactBootstrap from 'react-bootstrap';
@@ -72,7 +72,7 @@ function ForgotPassword() {
     }, [reducer.loading])
 
     return <>
-        <div className="authDiv">
+        <div className="authDiv" >
             <div className="leftDiv" id="fgtDiv">
                 <h1 className="authHead">Forgot Password!</h1>
                 <p className="authText" id="fgtText">Please enter your registered Email Address to proceed further.</p>

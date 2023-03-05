@@ -13,14 +13,14 @@ function App() {
  return <>
  <BrowserRouter>
     <Routes>
-        <Route exact element={<Login />} path="/login" />
+        {/* <Route exact element={<Login />} path="/login" />
         <Route exact element={<ForgotPassword />} path="/forgot" />
         <Route exact element={<Otp />} path="/otp" />
         <Route exact element={<ResetPassword />} path="/reset" />
         <Route exact element={<SignUp />} path="/signup" />
         <Route exact element={<SignVerify />} path="/signverify" />
-        <Route exact element={<SignupTwo />} path="/signuptwo" />
-        
+        <Route exact element={<SignupTwo />} path="/signuptwo" /> */}
+
         <Route exact element={<Homepage />} path="/" />
     </Routes>
  </BrowserRouter>
