@@ -5,19 +5,16 @@ import CinemaCard from "../Cinemas/cinemaCard"
 import Footer from "../Footer/footer"
 import MovieCard from "../Movies/Moviecard"
 import Navbar from "../Navbar/navbar"
-import { homeThunk } from "../Redux/cinemaSlice"
-import "./homepage.css"
+import { homeMovieThunk} from "../Redux/cinemaSlice"
 
-function Homepage() {
+function Moviepanel() {
 
     const dispatch = useDispatch()
     const reducer = useSelector((s) => s.home)
-    const [cinema, setCinema] = useState([])
     const [movie, setMovie] = useState([])
     useEffect(() => {
-        dispatch(homeThunk('Delhi'))
-        setCinema(reducer.cinemas)
-        setMovie(reducer.movies)
+        dispatch(homeMovieThunk('Delhi'))
+        setMovie(reducer.home_movie)
     }, [])
     return <>
         <Navbar />
@@ -28,15 +25,9 @@ function Homepage() {
                     return <MovieCard name={m.movie_name} image={m.movie_image} rating={m.movie_rating} genre={m.movie_genre} id={m._id} indexx={index} />
                 })}
             </div>
-            <p className="homeTitle" id="cinemaTitle">Cinemas Near you</p>
-            <div className="movieFlex">
-                {cinema.map((c, index) => {
-                    return <CinemaCard name={c.cinema_name} image={c.cinema_image} rating={c.cinema_rating} address={c.cinema_location} distance={c.cinema_distance} id={c._id} indexx={index} />
-                })}
-            </div>
         </div>
         <Footer />
     </>
 }
 
-export default Homepage
+export default Moviepanel

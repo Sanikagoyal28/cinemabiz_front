@@ -1,34 +1,23 @@
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import CinemaCard from "../Cinemas/cinemaCard"
 import Footer from "../Footer/footer"
-import MovieCard from "../Movies/Moviecard"
 import Navbar from "../Navbar/navbar"
-import { homeThunk } from "../Redux/cinemaSlice"
-import "./homepage.css"
+import { homeCinemaThunk} from "../Redux/cinemaSlice"
 
-function Homepage() {
+function Cinemapanel() {
 
     const dispatch = useDispatch()
     const reducer = useSelector((s) => s.home)
     const [cinema, setCinema] = useState([])
-    const [movie, setMovie] = useState([])
     useEffect(() => {
-        dispatch(homeThunk('Delhi'))
-        setCinema(reducer.cinemas)
-        setMovie(reducer.movies)
+        dispatch(homeCinemaThunk('Delhi'))
+        setCinema(reducer.home_cinema)
     }, [])
     return <>
         <Navbar />
         <div className="home POPUPBG">
-            <p className="homeTitle">Recommended Movies</p>
-            <div className="movieFlex">
-                {movie.map((m, index) => {
-                    return <MovieCard name={m.movie_name} image={m.movie_image} rating={m.movie_rating} genre={m.movie_genre} id={m._id} indexx={index} />
-                })}
-            </div>
-            <p className="homeTitle" id="cinemaTitle">Cinemas Near you</p>
+        <p className="homeTitle">Cinemas Near you</p>
             <div className="movieFlex">
                 {cinema.map((c, index) => {
                     return <CinemaCard name={c.cinema_name} image={c.cinema_image} rating={c.cinema_rating} address={c.cinema_location} distance={c.cinema_distance} id={c._id} indexx={index} />
@@ -39,4 +28,4 @@ function Homepage() {
     </>
 }
 
-export default Homepage
+export default Cinemapanel

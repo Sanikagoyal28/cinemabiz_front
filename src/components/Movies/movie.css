@@ -8,6 +8,8 @@
     flex-direction: column;
     padding-left:12px;
     padding-right:12px;
+    margin-right:2vw;
+    margin-bottom:16px;
 }
 .movieImage{
     width: 230px;
@@ -18,32 +20,36 @@
 }
 .moviename{
     font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 1.1rem;
     line-height: 22px;
-    margin-top:8px;
+    margin-top:6px;
 }
 .moviestar{
     display: flex;
     margin-top:-30px;
 }
-.star{
+.star, .star2{
     margin-right:6px;
     display: none;
 }
 .movierating{
     font-style: normal;
+    font-family: 'Montserrat';
     font-weight: 400;
-    font-size: 18px;
+    font-size: 1.1rem;
     margin-top:18px;
     line-height: 22px;
     color: rgba(0, 0, 0, 0.9);
 }
 .moviegenre{
     font-style: normal;
-    font-weight: 300;
-    font-size: 16px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 0.9rem;
     line-height: 22px;
     color: rgba(0, 0, 0, 0.7);
     margin-top:-12px;
+    margin-bottom:8px;
 }

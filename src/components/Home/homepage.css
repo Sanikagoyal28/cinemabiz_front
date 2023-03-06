@@ -3,9 +3,7 @@ body {
 }
 
 .home {
-    padding-left: 4vw;
-    padding-top: 24px;
-    padding-bottom:48px;
+    padding:24px 4vw 48px 4vw;
 }
 
 .homeTitle {
@@ -16,4 +14,10 @@ body {
     line-height: 34px;
     color: rgba(0, 0, 0, 0.85);
     margin-bottom:16px;
+}
+.movieFlex{
+    display: flex;
+}
+#cinemaTitle{
+    margin-top:12px;
 }

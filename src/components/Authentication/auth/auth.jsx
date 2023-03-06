@@ -433,6 +433,7 @@ function Auth() {
     useEffect(()=>{
         setOpenPopup(popup.isOpen)
     },[popup])
+    // console.log(openPopup)
     const [openDialog, setOpenDialog] = useState({
         login: openPopup,
         forgot: false,
@@ -442,6 +443,7 @@ function Auth() {
         signVerify: false,
         signupTwo: false
     })
+    // console.log(openDialog)
 
     return <>
         <div id="LOGIN">
