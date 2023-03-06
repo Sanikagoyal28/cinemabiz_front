@@ -2,9 +2,11 @@ import "./movie.css"
 import movie from "../Assets/movie.svg"
 import star from "../Assets/star.svg"
 import { useEffect } from "react"
+import { useNavigate } from "react-router"
 
 function MovieCard(props) {
 
+    const navigate = useNavigate()
     const count = props.rating;
     const index = props.indexx;
     const index1 = index * 5;
@@ -115,7 +117,7 @@ function MovieCard(props) {
     }, [count])
 
     return <>
-        <div className="moviecard">
+        <div className="moviecard" onClick={()=>{navigate(`/movie/${props.id}`)}}>
         {props.image?<img src={props.image} className="movieImage" />:<img src={movie} className="movieImage" />}
             <p className="moviename">{props.name}</p>
             <div className="moviestar">
@@ -127,9 +129,9 @@ function MovieCard(props) {
                 <span><p className="movierating">{props.rating}/10</p></span>
             </div>
             <p className="moviegenre">
-            {props.genre.map((g)=>{
+            {props.genre.length>0 ? props.genre.map((g)=>{
                 return <span>{g}/ </span>
-            })}
+            }) : null}
             </p>
         </div>
     </>

@@ -7,9 +7,11 @@ import ResetPassword from "./components/Authentication/ResetPassword/rstPwd";
 import SignUp from "./components/Authentication/SignUp/signUp";
 import SignupTwo from "./components/Authentication/SignUpTwo/signUpTwo";
 import SignVerify from "./components/Authentication/signVerify/signverify";
+import CinemaPage from "./components/Cinemas/cinemaPage";
 import Cinemapanel from "./components/Home/cinemaPanel";
 import Homepage from "./components/Home/homepage";
 import Moviepanel from "./components/Home/moviePanel";
+import MoviePage from "./components/Movies/moviePage";
 
 function App() {
  return <>
@@ -26,6 +28,8 @@ function App() {
         <Route exact element={<Homepage />} path="/" />
         <Route element={<Moviepanel />} path="/home_movie" />
         <Route element={<Cinemapanel />} path="/home_cinema" />
+        <Route element={<CinemaPage />} path="/cinema/:id" />
+        <Route path="/movie/:id" element={<MoviePage />} />
     </Routes>
  </BrowserRouter>
  </>

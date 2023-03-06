@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import CinemaCard from "../Cinemas/cinemaCard"
 import Footer from "../Footer/footer"
 import Navbar from "../Navbar/navbar"
-import { homeCinemaThunk} from "../Redux/cinemaSlice"
+import { homeCinemaThunk} from "../Redux/homeSlice"
 
 function Cinemapanel() {
 

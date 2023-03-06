@@ -5,7 +5,7 @@ import CinemaCard from "../Cinemas/cinemaCard"
 import Footer from "../Footer/footer"
 import MovieCard from "../Movies/Moviecard"
 import Navbar from "../Navbar/navbar"
-import { homeMovieThunk} from "../Redux/cinemaSlice"
+import { homeMovieThunk} from "../Redux/homeSlice"
 
 function Moviepanel() {
 
@@ -20,10 +20,15 @@ function Moviepanel() {
         <Navbar />
         <div className="home POPUPBG">
             <p className="homeTitle">Recommended Movies</p>
-            <div className="movieFlex">
+            <div id="movieFlexbox">
+            <div className="homeMovieFlex">
                 {movie.map((m, index) => {
                     return <MovieCard name={m.movie_name} image={m.movie_image} rating={m.movie_rating} genre={m.movie_genre} id={m._id} indexx={index} />
                 })}
+            </div>
+            <div className="movieFilter">
+
+            </div>
             </div>
         </div>
         <Footer />

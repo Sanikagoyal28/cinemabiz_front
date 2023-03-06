@@ -3,7 +3,7 @@ body {
 }
 
 .home {
-    padding:24px 4vw 48px 4vw;
+    padding:24px 4vw 48px 4.5vw;
 }
 
 .homeTitle {
@@ -17,7 +17,23 @@ body {
 }
 .movieFlex{
     display: flex;
+    flex-wrap: wrap;
 }
 #cinemaTitle{
     margin-top:12px;
+}
+#movieFlexbox{
+    display: flex;
+}
+.homeMovieFlex{
+    display: flex;
+    flex-wrap: wrap;
+    width:73vw;
+}
+.movieFilter{
+    /* position:fixed; */
+    margin-right:-2vw;
+    height:400px;
+    width:20vw;
+    background: #FFFFFF;
 }

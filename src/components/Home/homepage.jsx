@@ -5,7 +5,7 @@ import CinemaCard from "../Cinemas/cinemaCard"
 import Footer from "../Footer/footer"
 import MovieCard from "../Movies/Moviecard"
 import Navbar from "../Navbar/navbar"
-import { homeThunk } from "../Redux/cinemaSlice"
+import { homeThunk } from "../Redux/homeSlice"
 import "./homepage.css"
 
 function Homepage() {

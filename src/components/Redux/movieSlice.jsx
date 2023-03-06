@@ -4,17 +4,17 @@ import Baseurl from "./Baseurl"
 
 const initialState ={
     loading:false,
-    cinema:''
+    movie:'',
 }
 
-const cinemaThunk = createAsyncThunk("cinema", async(id)=>{
+const movieThunk = createAsyncThunk("movie", async(id)=>{
     const accessToken =localStorage.getItem("access token")
     const config = {
         headers: {
             "Authorization": `Bearer ${accessToken}`
         }
     }
-    return await Baseurl.get(`cinema/${id}`, config)
+    return await Baseurl.get(`movie/${id}`, config)
     .then((res)=>{
         return res
     })
@@ -23,22 +23,22 @@ const cinemaThunk = createAsyncThunk("cinema", async(id)=>{
     })
 })
 
-const cinemaSlice = createSlice({
-    name:"cinema",
+const movieSlice = createSlice({
+    name:"movie",
     initialState:initialState,
     reducers:{},
     extraReducers:(builder)=>{
-        builder.addCase(cinemaThunk.pending, (state)=>{
+        builder.addCase(movieThunk.pending, (state)=>{
             state.loading = true;
         })
-        builder.addCase(cinemaThunk.fulfilled, (state, action)=>{
+        builder.addCase(movieThunk.fulfilled, (state, action)=>{
             state.loading = false;
-            state.cinema = action.payload.data.cinema
+            state.movie = action.payload.data.movie
         })
-        builder.addCase(cinemaThunk.rejected, (state, action)=>{
+        builder.addCase(movieThunk.rejected, (state, action)=>{
             state.loading= false
         })
     }
 })
 
-export {cinemaSlice, cinemaThunk}
+export {movieSlice, movieThunk}
