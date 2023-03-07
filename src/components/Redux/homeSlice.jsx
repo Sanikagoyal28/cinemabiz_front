@@ -6,17 +6,15 @@ const initialState ={
     cinemas:'',
     movies:'',
     home_movie:'',
-    home_cinema:''
+    home_cinema:'',
+    languages:'',
+    genre:'',
+    search:''
 }
 
-const homeThunk = createAsyncThunk("home", async(location)=>{
-    const accessToken =localStorage.getItem("access token")
-    const config = {
-        headers: {
-            "Authorization": `Bearer ${accessToken}`
-        }
-    }
-    return await Baseurl.get(`home/${location}`, config)
+const homeThunk = createAsyncThunk("home", async()=>{
+    const location = localStorage.getItem("location")
+    return await Baseurl.get(`home/${location}`)
     .then((res)=>{
         return res
     })
@@ -25,14 +23,9 @@ const homeThunk = createAsyncThunk("home", async(location)=>{
     })
 })
 
-const homeMovieThunk = createAsyncThunk("home/movies", async(location)=>{
-    const accessToken =localStorage.getItem("access token")
-    const config = {
-        headers: {
-            "Authorization": `Bearer ${accessToken}`
-        }
-    }
-    return await Baseurl.get(`get_movies/${location}`, config)
+const homeMovieThunk = createAsyncThunk("home/movies", async()=>{
+    const location = localStorage.getItem("location")
+    return await Baseurl.get(`get_movies/${location}`)
     .then((res)=>{
         return res
     })
@@ -41,14 +34,19 @@ const homeMovieThunk = createAsyncThunk("home/movies", async(location)=>{
     })
 })
 
-const homeCinemaThunk = createAsyncThunk("home/cinemas", async(location)=>{
-    const accessToken =localStorage.getItem("access token")
-    const config = {
-        headers: {
-            "Authorization": `Bearer ${accessToken}`
-        }
-    }
-    return await Baseurl.get(`get_cinemas/${location}`, config)
+const homeCinemaThunk = createAsyncThunk("home/cinemas", async()=>{
+    const location = localStorage.getItem("location")
+    return await Baseurl.get(`get_cinemas/${location}`)
+    .then((res)=>{
+        return res
+    })
+    .catch((err)=>{
+        return err
+    })
+})
+
+const SearchThunk = createAsyncThunk("search", async(value)=>{
+    return await Baseurl.get(`search/?location=${value}`)
     .then((res)=>{
         return res
     })
@@ -68,6 +66,7 @@ const homeSlice = createSlice({
             state.loading = true;
         })
         builder.addCase(homeThunk.fulfilled, (state, action)=>{
+
             state.loading = false;
             state.cinemas = action.payload.data.cinema
             state.movies = action.payload.data.movie
@@ -82,6 +81,8 @@ const homeSlice = createSlice({
         builder.addCase(homeMovieThunk.fulfilled, (state, action)=>{
             state.loading = false;
             state.home_movie = action.payload.data.movies
+            state.languages = action.payload.data.languages
+            state.genre = action.payload.data.genre
         })
         builder.addCase(homeMovieThunk.rejected, (state, action)=>{
             state.loading= false
@@ -97,8 +98,20 @@ const homeSlice = createSlice({
         builder.addCase(homeCinemaThunk.rejected, (state, action)=>{
             state.loading= false
         })
+        // search
+        builder.addCase(SearchThunk.pending, (state)=>{
+            state.loading = true;
+        })
+        builder.addCase(SearchThunk.fulfilled, (state, action)=>{
+            console.log(action)
+            state.loading = false;
+            state.search = action.payload.data.location
+        })
+        builder.addCase(SearchThunk.rejected, (state, action)=>{
+            state.loading= false
+        })
     }
 })
 
-export {homeThunk, homeMovieThunk, homeCinemaThunk}
+export {homeThunk, homeMovieThunk, homeCinemaThunk, SearchThunk}
 export {homeSlice}

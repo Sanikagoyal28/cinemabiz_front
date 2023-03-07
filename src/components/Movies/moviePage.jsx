@@ -19,12 +19,15 @@ function MoviePage() {
 
     useEffect(() => {
         dispatch(movieThunk(id))
+    }, [id])
+
+    useEffect(()=>{
         setMovieInfo(reducer.movie)
         setLanguage(reducer.movie.movie_language)
         setGenre(reducer.movie.movie_genre)
         setCast(reducer.movie.movie_cast)
         setCrew(reducer.movie.movie_crew)
-    }, [id])
+    },[reducer])
     return <>
         <Navbar />
         <div className="moviePage">

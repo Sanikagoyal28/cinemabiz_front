@@ -8,13 +8,7 @@ const initialState ={
 }
 
 const cinemaThunk = createAsyncThunk("cinema", async(id)=>{
-    const accessToken =localStorage.getItem("access token")
-    const config = {
-        headers: {
-            "Authorization": `Bearer ${accessToken}`
-        }
-    }
-    return await Baseurl.get(`cinema/${id}`, config)
+    return await Baseurl.get(`cinema/${id}`)
     .then((res)=>{
         return res
     })

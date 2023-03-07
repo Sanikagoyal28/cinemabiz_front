@@ -11,7 +11,7 @@ function Cinemapanel() {
     const reducer = useSelector((s) => s.home)
     const [cinema, setCinema] = useState([])
     useEffect(() => {
-        dispatch(homeCinemaThunk('Delhi'))
+        dispatch(homeCinemaThunk())
         setCinema(reducer.home_cinema)
     }, [])
     return <>
@@ -19,9 +19,9 @@ function Cinemapanel() {
         <div className="home POPUPBG">
         <p className="homeTitle">Cinemas Near you</p>
             <div className="movieFlex">
-                {cinema.map((c, index) => {
+                {cinema.length >0 ? cinema.map((c, index) => {
                     return <CinemaCard name={c.cinema_name} image={c.cinema_image} rating={c.cinema_rating} address={c.cinema_location} distance={c.cinema_distance} id={c._id} indexx={index} />
-                })}
+                }) : null}
             </div>
         </div>
         <Footer />

@@ -15,7 +15,7 @@ function Homepage() {
     const [cinema, setCinema] = useState([])
     const [movie, setMovie] = useState([])
     useEffect(() => {
-        dispatch(homeThunk('Delhi'))
+        dispatch(homeThunk())
         setCinema(reducer.cinemas)
         setMovie(reducer.movies)
     }, [])
