@@ -29,7 +29,7 @@ function App() {
         <Route element={<Moviepanel />} path="/home_movie" />
         <Route element={<Cinemapanel />} path="/home_cinema" />
         <Route element={<CinemaPage />} path="/cinema/:id" />
-        <Route path="/movie/:id" element={<MoviePage />} />
+        <Route path="/movie/:place/:id" element={<MoviePage />} />
     </Routes>
  </BrowserRouter>
  </>

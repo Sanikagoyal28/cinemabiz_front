@@ -14,6 +14,7 @@ const initialState ={
 
 const homeThunk = createAsyncThunk("home", async()=>{
     const location = localStorage.getItem("location")
+    console.log(location)
     return await Baseurl.get(`home/${location}`)
     .then((res)=>{
         return res

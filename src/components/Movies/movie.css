@@ -57,6 +57,9 @@
 
 /* movie page */
 
+.carouselContainer{
+    width:100%;
+}
 .moviePage{
     display: flex;
     flex-direction: column;
@@ -67,9 +70,27 @@
 .movieCoverImage{
     background: rgba(0, 0, 0, 0.5);
     width:105%;
-    height:360px;
+    height:330px;
     margin-left:-4vw;
-    margin-bottom:20px;
+    margin-bottom:16px;
+}
+.buttonBook{
+    position: fixed;
+    top:440px;
+    width: 180px;
+height: 40px;
+background: #C81912;
+border-radius: 8px;
+outline: none;
+border: none;
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 27px;
+color: #FFFFFF;
+margin-left:78vw;
+margin-bottom:-38px;
 }
 .movieLang{
     font-family: 'Inter';
@@ -95,7 +116,9 @@
 }
 .movieCast{
     display: flex;
-    width:75vw;
+    flex-wrap: wrap;
+    width:70vw;
+    /* padding-left:2vw; */
 }
 .castDiv{
 margin-right:1.5vw;

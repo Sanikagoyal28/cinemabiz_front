@@ -6,6 +6,7 @@ import Footer from "../Footer/footer"
 import MovieCard from "../Movies/Moviecard"
 import Navbar from "../Navbar/navbar"
 import { homeMovieThunk} from "../Redux/homeSlice"
+import Movie from "./movie"
 
 function Moviepanel() {
 
@@ -31,7 +32,7 @@ function Moviepanel() {
             <div id="movieFlexbox">
             <div className="homeMovieFlex">
                 {movie.length >0 ? movie.map((m, index) => {
-                    return <MovieCard name={m.movie_name} image={m.movie_image} rating={m.movie_rating} genre={m.movie_genre} id={m._id} indexx={index} />
+                    return <Movie name={m.movie_name} image={m.movie_image} rating={m.movie_rating} genre={m.movie_genre} id={m._id} indexx={index} />
                 }): null}
             </div>
             <div className="movieFilter">

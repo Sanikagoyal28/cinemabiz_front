@@ -7,6 +7,7 @@ import MovieCard from "../Movies/Moviecard"
 import Navbar from "../Navbar/navbar"
 import { homeThunk } from "../Redux/homeSlice"
 import "./homepage.css"
+import Movie from "./movie"
 
 function Homepage() {
 
@@ -24,15 +25,15 @@ function Homepage() {
         <div className="home POPUPBG">
             <p className="homeTitle">Recommended Movies</p>
             <div className="movieFlex">
-                {movie.map((m, index) => {
-                    return <MovieCard name={m.movie_name} image={m.movie_image} rating={m.movie_rating} genre={m.movie_genre} id={m._id} indexx={index} />
-                })}
+                {movie.length>0 ? movie.map((m, index) => {
+                    return <Movie name={m.movie_name} image={m.movie_image} rating={m.movie_rating} genre={m.movie_genre} id={m._id} indexx={index} />
+                }): null}
             </div>
             <p className="homeTitle" id="cinemaTitle">Cinemas Near you</p>
             <div className="movieFlex">
-                {cinema.map((c, index) => {
+                {cinema.length>0 ? cinema.map((c, index) => {
                     return <CinemaCard name={c.cinema_name} image={c.cinema_image} rating={c.cinema_rating} address={c.cinema_location} distance={c.cinema_distance} id={c._id} indexx={index} />
-                })}
+                }) : null}
             </div>
         </div>
         <Footer />

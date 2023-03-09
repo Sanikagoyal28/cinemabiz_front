@@ -88,9 +88,9 @@ function Navbar() {
             <div className="search">
                 <input type="text" className="searchInput" placeholder="Search for location" value={search} onChange={handleSearch} />
                 <div id="searchList">
-                    {searchList.map((s) => {
+                    {searchList.length>0 ? searchList.map((s) => {
                         return <p className="searchOption" onClick={() => { setOpen(false); localStorage.setItem("location", s.cinema_location) }} >{s.cinema_location}</p>
-                    })}
+                    }): null}
                 </div>
                 <img src={searchImage} className="searchImage" />
             </div>
